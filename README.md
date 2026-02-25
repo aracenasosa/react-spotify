@@ -98,17 +98,6 @@ This abstraction allows seamless switching between modes without component-level
 
 ## 🎭 Guest Mode
 
-- `npm start`: Runs the app in development mode.
-- `npm test`: Launches the test runner.
-- `npm run build`: Builds the app for production.
-
----
-
-_Built with ❤️ by [Carlos Aracena](https://github.com/aracenasosa)_
-
-
-## 🎭 Guest Mode
-
 Guest Mode allows users to explore the application without Spotify authentication, making it perfect for:
 
 - **Demos & Presentations**: Showcase the UI/UX without requiring attendees to log in.
@@ -132,3 +121,14 @@ Guest mode is managed through:
 - **Session Manager** (`src/helpers/sessionManager.js`): Handles guest mode state in localStorage
 - **Data Provider** (`src/helpers/dataProvider.js`): Routes requests to mock data or Spotify API
 - **Mock Data** (`src/helpers/mockData.js`): Curated dataset with real Spotify CDN URLs
+
+## 📜 Available Scripts
+
+
+- `npm start`: Runs the app in development mode.
+- `npm test`: Launches the test runner.
+- `npm run build`: Builds the app for production.
+
+---
+
+_Built with ❤️ by [Carlos Aracena](https://github.com/aracenasosa)_
