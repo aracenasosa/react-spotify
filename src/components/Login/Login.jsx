@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import Style from './Login.module.css';
 import Spotify from '../../assets/spotifyIcon.svg';
+import UnauthorizedModal from '../UnauthorizedModal/UnauthorizedModal';
+import { useSpotify } from '../../context/SpotifyContext';
 import {
   clientId,
   redirectUri,
@@ -20,8 +22,19 @@ const CODE_VERIFIER_KEY = 'spotify_code_verifier';
 const Login = () => {
   const history = useHistory();
   const location = useLocation();
+  const { activateGuestMode } = useSpotify();
   const [authError, setAuthError] = useState('');
   const [exchanging, setExchanging] = useState(false);
+  const [showUnauthorizedModal, setShowUnauthorizedModal] = useState(false);
+
+  // Check if we need to show the unauthorized modal
+  useEffect(() => {
+    const shouldShowModal = localStorage.getItem('show_unauthorized_modal');
+    if (shouldShowModal === 'true') {
+      setShowUnauthorizedModal(true);
+      localStorage.removeItem('show_unauthorized_modal');
+    }
+  }, []);
 
   // Handle callback from Spotify: ?code=... or ?error=...
   useEffect(() => {
@@ -104,6 +117,15 @@ const Login = () => {
     }
   };
 
+  const handleCloseModal = () => {
+    setShowUnauthorizedModal(false);
+  };
+
+  const handleContinueAsGuest = () => {
+    setShowUnauthorizedModal(false);
+    activateGuestMode();
+  };
+
   if (exchanging) {
     return (
       <section className={Style.container}>
@@ -117,13 +139,29 @@ const Login = () => {
 
   return (
     <section className={Style.container}>
+      <UnauthorizedModal 
+        isOpen={showUnauthorizedModal} 
+        onClose={handleCloseModal}
+        onContinueAsGuest={handleContinueAsGuest}
+      />
+      
       <form className={Style.form}>
         <img className={Style.App_logo} src={Spotify} alt="Spotify Logo" />
         {authError && (
           <p style={{ color: '#ff6b6b', marginBottom: '12px' }}>{authError}</p>
         )}
         <button type="button" className={Style.loginButton} onClick={handleLogin}>
-          LOG IN
+          LOG IN WITH SPOTIFY
+        </button>
+        
+        <div className={Style.divider}>or</div>
+        
+        <button 
+          type="button" 
+          className={Style.guestButton}
+          onClick={handleContinueAsGuest}
+        >
+          CONTINUE AS GUEST
         </button>
       </form>
     </section>

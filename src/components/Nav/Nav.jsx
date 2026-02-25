@@ -13,7 +13,7 @@ import { UserPlaylist } from '../../hooks/hook';
 import { useSpotify } from '../../context/SpotifyContext';
 
 function Nav() {
-    const { token, setSearch } = useSpotify();
+    const { token, setSearch, isGuest } = useSpotify();
     const { data } = UserPlaylist(token);
     const location = useLocation();
 
@@ -59,9 +59,11 @@ function Nav() {
                 <section className={Style.playlist} style={{display: menu ? 'block' : 'none'}}>
                     <h3>PLAYLISTS</h3>
                     <ul className={Style.playlistList}>
-                        <Link to={`/createPlaylist`} className={Style.playlistLinks}>
-                            <img src={Cruz} className={Style.cruz} alt="Create" /> <span>Create Playlist</span>
-                        </Link>
+                        {!isGuest && (
+                            <Link to={`/createPlaylist`} className={Style.playlistLinks}>
+                                <img src={Cruz} className={Style.cruz} alt="Create" /> <span>Create Playlist</span>
+                            </Link>
+                        )}
                         <Link to={`/likedSongs`} className={Style.playlistLinks}>
                             <img src={Heart} className={Style.heart} alt="Liked" /> <span >Liked Songs</span>
                         </Link>
@@ -72,16 +74,16 @@ function Nav() {
 
                 <section className={Style.userPlaylist}>
                     {data ? data.map(playlist => (
-                        <a href={`/playlist/${playlist.id}`} style={{ textDecoration: 'none' }} key={playlist ? playlist.name : ''}>
+                        <Link to={`/playlist/${playlist.id}`} style={{ textDecoration: 'none' }} key={playlist ? playlist.name : ''}>
                             <div className={Style.card}>
                                 <p className={Style.playlistName}>{playlist.name ? playlist.name.substring(0, 25) : ''} <span style={{ display: playlist.name !== undefined ? playlist.name.length > 25 ? 'inline' : 'none' : '', color: '#fff' }}>...</span></p>
                                 <img className={Style.collaborativeImg} style={{ display: playlist.collaborative ? 'inline-block' : 'none' }} src={Collaborite} alt="Collaborative" />
                             </div>
-                        </a>
+                        </Link>
                     )).slice(0, data.length > 10 ? 10 : data.length) : ''}
-                    <a href={`/playlists`} style={{textDecoration: 'none'}}>
+                    <Link to={`/playlists`} style={{textDecoration: 'none'}}>
                         <p className={Style.seeAll} style={{ display: data.length > 10 ? 'block' : 'none' }}>See more</p>
-                    </a>
+                    </Link>
                 </section>
             </section>
         </nav>

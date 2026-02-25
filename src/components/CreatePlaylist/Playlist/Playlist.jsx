@@ -26,7 +26,7 @@ const Playlist = ({ playlist, token, setTrigger }) => {
                 <h4>{playlist ? playlist.name.substring(0, 19) : ''} <span style={{ display: playlist ? playlist.name.length > 19 ? 'inline' : 'none' : '', color: '#fff' }}>...</span></h4>
 
                 <div className={Style.btnFlex}>
-                    <a className={Style.btnEdit} href={`/editPlaylist/${playlist.id}`}>Edit</a>
+                    <Link className={Style.btnEdit} to={`/editPlaylist/${playlist.id}`}>Edit</Link>
                     <button 
                         className={Style.btnDelete} 
                         onClick={() => {

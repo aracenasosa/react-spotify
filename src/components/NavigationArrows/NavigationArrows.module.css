@@ -16,13 +16,20 @@
   align-items: center;
   transition: background 0.2s ease, transform 0.1s ease;
   cursor: pointer;
+  border: none;
+  padding: 0;
 }
 
-.arrowCircle:hover {
+.arrowCircle:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.arrowCircle:not(:disabled):hover {
   background: rgba(0, 0, 0, 0.85);
 }
 
-.arrowCircle:active {
+.arrowCircle:not(:disabled):active {
   transform: scale(0.9);
 }
 

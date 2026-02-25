@@ -18,7 +18,7 @@ import { useSpotify } from '../../context/SpotifyContext';
 
 const Search = () => {
 
-    const { token, user, userLoading, search, setSearch } = useSpotify();
+    const { token, user, userLoading, search, setSearch, isGuest } = useSpotify();
     const { data, loading, err } = Artists(search, token);
     const { data: track, loading: loadingTrack, err: errTrack } = Track(search, token);
     const { data: album, loading: loadingAlbum, err: errAlbum } = ObtainAlbum(data[0] ? data[0].id : '', token);
@@ -90,6 +90,24 @@ const Search = () => {
 
                         <UserProfileHeader user={user} />
                     </form>
+                    
+                    {isGuest && isSearching && (
+                        <div style={{
+                            backgroundColor: 'rgba(255, 193, 7, 0.15)',
+                            border: '1px solid rgba(255, 193, 7, 0.5)',
+                            borderRadius: '8px',
+                            padding: '12px 16px',
+                            margin: '16px 0',
+                            color: '#ffc107',
+                            fontSize: '14px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '10px'
+                        }}>
+                            <i className="fas fa-info-circle"></i>
+                            <span>You're viewing sample data. Search results will show the same content regardless of your query. Log in to access real Spotify data.</span>
+                        </div>
+                    )}
                 </section>
 
                 {isSearching ?

@@ -54,6 +54,16 @@
 
 .loading {
   color: #fff;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .titleContainer {
@@ -116,6 +126,33 @@
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 25px;
     padding: 0 15px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .releasesContainer,
+  .featuredContainer,
+  .recentlyContainer {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    max-width: 250px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .h2 {
+    text-align: center;
+    margin-left: 0;
+  }
+  
+  .titleContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .seeAll {
+    margin-right: 0;
+    margin-top: 10px;
   }
 }
 

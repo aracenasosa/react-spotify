@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const NewReleases = ({ release }) => {
     return (
         <section className={Style.marginContainer}>
-            <a href={`/album/${release ? release.id : ''}`} style={{ textDecoration: 'none' }}>
+            <Link to={`/album/${release ? release.id : ''}`} style={{ textDecoration: 'none' }}>
                 <section className={Style.card}>
                     <img className={Style.artistImg} src={release.images && release.images[0] ? release.images[0].url : User} alt={release.name} />
 
@@ -15,7 +15,7 @@ const NewReleases = ({ release }) => {
                     <p>{release.artists && release.artists[0] ? release.artists[0].name.substring(0, 20) : ''} <span style={{ display: release.artists && release.artists[0] && release.artists[0].name.length > 20 ? 'inline' : 'none', color: '#fff' }}>...</span></p>
 
                 </section>
-            </a>
+            </Link>
         </section >
     )
 }

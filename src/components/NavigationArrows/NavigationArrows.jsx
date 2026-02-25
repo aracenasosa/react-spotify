@@ -9,27 +9,44 @@ const NavigationArrows = () => {
     const history = useHistory();
     const { canGoForward, setCanGoForward, canGoBack, setCanGoBack } = useSpotify();
 
-    const handleBack = () => {
-        history.goBack();
-        setCanGoForward(true);
+    const handleBack = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (history.length > 1) {
+            history.goBack();
+            setCanGoForward(true);
+        }
     };
 
-    const handleForward = () => {
-        history.goForward();
-        // Forward availability is kept until a PUSH happens (handled by context listener)
+    const handleForward = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (canGoForward) {
+            history.goForward();
+        }
     };
 
     return (
         <section className={Style.leftRight}>
-            <div className={Style.arrowCircle} onClick={handleBack} title="Go back">
+            <button 
+                type="button"
+                className={Style.arrowCircle} 
+                onClick={handleBack} 
+                title="Go back"
+                disabled={history.length <= 1}
+            >
                 <img src={Left} alt="Back" />
-            </div>
-            <div className={Style.arrowCircle} 
-                 onClick={handleForward} 
-                 title="Go forward"
-                 style={{ visibility: canGoForward ? 'visible' : 'hidden' }}>
+            </button>
+            <button 
+                type="button"
+                className={Style.arrowCircle} 
+                onClick={handleForward} 
+                title="Go forward"
+                style={{ visibility: canGoForward ? 'visible' : 'hidden' }}
+                disabled={!canGoForward}
+            >
                 <img src={Right} alt="Forward" />
-            </div>
+            </button>
         </section>
     );
 };

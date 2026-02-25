@@ -11,13 +11,15 @@
   background: rgb(40, 40, 40);
   margin: auto;
   width: 350px;
-  height: 250px;
+  min-height: 250px;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-flow: column wrap;
-  padding: 10px;
+  padding: 30px 20px;
   border-radius: 10px;
+  gap: 8px;
 }
 
 .form a {
@@ -41,8 +43,8 @@
 }
 
 .form button.loginButton {
-  margin: 40px 0 0 0;
-  padding: 10px 120px;
+  margin: 20px 0 0 0;
+  padding: 12px 32px;
   border-radius: 50px;
   background: rgb(24, 216, 96);
   color: #fff;
@@ -50,7 +52,40 @@
   border: none;
   transition: all 0.5s ease;
   font: inherit;
+  font-size: 14px;
+  font-weight: 700;
   cursor: pointer;
+  width: 100%;
+  max-width: 280px;
+}
+
+.divider {
+  margin: 12px 0;
+  color: #b3b3b3;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.guestButton {
+  padding: 12px 32px;
+  border-radius: 50px;
+  background: #535353;
+  color: #fff;
+  outline: none;
+  border: none;
+  transition: all 0.3s ease;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  max-width: 280px;
+  margin-bottom: 10px;
+}
+
+.guestButton:hover {
+  background: #727272;
+  transform: scale(1.04);
 }
 
 .App_logo {
@@ -77,38 +112,54 @@
 @media screen and (max-width: 380px) {
   .form {
     width: 300px;
+    padding: 25px 15px;
   }
 
   .form a,
-  .form button.loginButton {
-    padding: 10px 80px;
+  .form button.loginButton,
+  .guestButton {
+    padding: 10px 24px;
+    font-size: 13px;
+    max-width: 240px;
   }
 }
 
 @media screen and (max-width: 320px) {
   .form {
-    width: 200px;
+    width: 260px;
+    padding: 20px 15px;
   }
 
   .form a,
-  .form button.loginButton {
-    padding: 10px 40px;
-  }
-}
-
-@media screen and (max-width: 210px) {
-  .form {
-    width: 120px;
-  }
-
-  .form a,
-  .form button.loginButton {
+  .form button.loginButton,
+  .guestButton {
     padding: 10px 20px;
+    font-size: 12px;
+    max-width: 200px;
   }
 
   .App_logo {
     width: 80px;
     height: 80px;
-    pointer-events: none;
+  }
+}
+
+@media screen and (max-width: 280px) {
+  .form {
+    width: 220px;
+    padding: 20px 10px;
+  }
+
+  .form a,
+  .form button.loginButton,
+  .guestButton {
+    padding: 8px 16px;
+    font-size: 11px;
+    max-width: 180px;
+  }
+
+  .App_logo {
+    width: 70px;
+    height: 70px;
   }
 }

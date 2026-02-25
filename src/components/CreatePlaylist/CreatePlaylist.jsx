@@ -26,7 +26,7 @@ const CreatePlaylist = () => {
                 <section className={Style.playlists}>
                     <section className={Style.section_a} style={{ display: data && data.length > 0 ? 'block' : 'none' }}>
                         <h2 className={Style.h2}>Playlists</h2>
-                        <a className={Style.btnCreate} href={`/createPlaylistForm`}>Create New</a>
+                        <Link className={Style.btnCreate} to={`/createPlaylistForm`}>Create New</Link>
                         <div className={Style.flex}>
                             {data && data.length > 0 ? data.map(playlist => <Playlist playlist={playlist} token={token} key={playlist.id} setTrigger={setTrigger} />) : ''}
                         </div>

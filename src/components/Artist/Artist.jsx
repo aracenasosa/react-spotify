@@ -86,7 +86,7 @@ const Artist = ({ match: { params: { id } } }) => {
                     <h1>Discography</h1>
                     <section className={Style.discographyContainer}>
                         {album.length > 0 ? album.map(alb => (
-                            <Link to={`/album/${alb.id}`} style={{ textDecoration: 'none' }}>
+                            <Link key={alb.id} to={`/album/${alb.id}`} style={{ textDecoration: 'none' }}>
                                 <section className={Style.discography}>
                                     <img className={Style.artistImg} src={alb.images[0] ? alb.images[0].url : User} alt={alb.name} />
 
@@ -108,7 +108,7 @@ const Artist = ({ match: { params: { id } } }) => {
                     <h1>Appears On</h1>
                     <section className={Style.appearContainer}>
                         {appears.length > 0 ? appears.map(appear => (
-                            <Link to={`/album/${appear.id}`} style={{ textDecoration: 'none' }}>
+                            <Link key={appear.id} to={`/album/${appear.id}`} style={{ textDecoration: 'none' }}>
                                 <section className={Style.appear}>
                                     <img className={Style.appearImg} src={appear.images[0] ? appear.images[0].url : User} alt={appear.name} />
 

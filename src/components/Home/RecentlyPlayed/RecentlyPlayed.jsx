@@ -11,7 +11,7 @@ const RecentlyPlayed = ({recentlyPlayed, token}) => {
 
     return (
         <section className={Style.marginContainer}>
-            <a href={`/album/${track?.album ? track.album.id : ''}`} style={{ textDecoration: 'none' }}>
+            <Link to={`/album/${track?.album ? track.album.id : ''}`} style={{ textDecoration: 'none' }}>
                 <section className={Style.card}>
                     <img className={Style.artistImg} src={data && data.images && data.images.length > 0 ? data.images[0].url : User} alt={data ? data.name : ''} />
 
@@ -20,7 +20,7 @@ const RecentlyPlayed = ({recentlyPlayed, token}) => {
                     <p>{track ? track.name.substring(0, 20) : ''} <span style={{ display: track && track.name.length > 20 ? 'inline' : 'none', color: '#fff' }}>...</span></p>
 
                 </section>
-            </a>
+            </Link>
         </section >
     )
 }

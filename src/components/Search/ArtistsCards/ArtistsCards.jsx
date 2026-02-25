@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const ArtistsCards = ({ artist }) => {
     return (
         <section className={Style.marginContainer}>
-            <a href={`/artist/${artist.id}`} style={{ textDecoration: 'none' }}>
+            <Link to={`/artist/${artist.id}`} style={{ textDecoration: 'none' }}>
                 <section className={Style.card}>
                     <img className={Style.artistImg} src={artist.images[0] ? artist.images[0].url : User} alt={artist.name} />
 
@@ -16,7 +16,7 @@ const ArtistsCards = ({ artist }) => {
                         <p>{artist.type}</p>
                     </div>
                 </section>
-            </a>
+            </Link>
         </section>
     )
 }

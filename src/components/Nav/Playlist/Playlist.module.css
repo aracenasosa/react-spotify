@@ -85,17 +85,6 @@
   width: 100%;
 }
 
-.arrows img {
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 50%;
-  padding: 5px;
-  margin-right: 10px;
-}
-
-.arrows img:hover {
-  cursor: pointer;
-}
-
 .playlistImg {
   width: clamp(200px, 20vw, 260px);
   height: auto;
@@ -200,6 +189,11 @@
   text-align: center;
   width: 100%;
   padding-top: 100px;
+  display: inline-block;
+}
+
+.loading i {
+  display: inline-block;
 }
 
 /* RESPONSIVE BREAKPOINTS SYNCHRONIZED WITH NAV */

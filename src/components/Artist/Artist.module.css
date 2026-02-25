@@ -260,3 +260,20 @@
     padding-right: 20px;
   }
 }
+
+.loading {
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  padding-top: 100px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

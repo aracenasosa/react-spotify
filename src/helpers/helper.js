@@ -15,6 +15,28 @@ spotify.interceptors.request.use(config => {
     return config;
 });
 
+// Response interceptor to handle 403 errors (unauthorized users)
+spotify.interceptors.response.use(
+    response => response,
+    error => {
+        // Check if error is 403 Forbidden
+        if (error.response?.status === 403) {
+            // Clear all session data
+            localStorage.clear();
+            sessionStorage.clear();
+            
+            // Set flag to show unauthorized modal
+            localStorage.setItem('show_unauthorized_modal', 'true');
+            
+            // Redirect to login page
+            window.location.href = '/';
+        }
+        
+        // Propagate error for other status codes
+        throw error;
+    }
+);
+
 /**
  * Generic request helper to centralize all Spotify API calls
  */

@@ -18,3 +18,4 @@ export { default as CreatePlaylistForm } from './CreatePlaylist/CreatePlaylistFo
 export { default as EditPlaylist } from './CreatePlaylist/EditPlaylist/EditPlaylist';
 export { default as UserProfile } from './UserProfile/UserProfile';
 export { default as UserProfileHeader } from './UserProfileHeader/UserProfileHeader';
+export { default as UnauthorizedModal } from './UnauthorizedModal/UnauthorizedModal';

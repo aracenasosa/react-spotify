@@ -74,14 +74,14 @@ const SpecificAlbum = ({ match: { params: { id } } }) => {
                         <section className={Style.section_b}>
                             <div className={Style.titleContainer}>
                                 <h1>More by {data.artists ? data.artists[0].name : ''}</h1>
-                                <a href={`/allAlbum/${data && data.artists ? data.artists[0].id : ''}`} style={{ textDecoration: 'none' }}>
+                                <Link to={`/allAlbum/${data && data.artists ? data.artists[0].id : ''}`} style={{ textDecoration: 'none' }}>
                                     <p className={Style.seeAll} style={{ display: album && album.length > 8 ? 'block' : 'none' }}>See All</p>
-                                </a>
+                                </Link>
                             </div>
                             <section className={Style.albumContainer}>
                                 {!loadingAlbum ? (
                                     album && album.length > 0 ? album.map(alb => (
-                                        <a href={`/album/${alb.id}`} style={{ textDecoration: 'none' }} key={alb.id}>
+                                        <Link to={`/album/${alb.id}`} style={{ textDecoration: 'none' }} key={alb.id}>
                                             <section className={Style.album}>
                                                 <img className={Style.artistImg} src={alb.images[0] ? alb.images[0].url : User} alt={alb.name} />
 
@@ -93,7 +93,7 @@ const SpecificAlbum = ({ match: { params: { id } } }) => {
                                                     <span> {alb.album_type}</span>
                                                 </div>
                                             </section>
-                                        </a>
+                                        </Link>
                                     )).slice(0, 8) : <p style={{color: '#fff'}}>Not Data Available</p>
                                 ) : <i className={cx('fas fa-sync fa-spin fa-3x', Style.loadingSmall)}></i>}
                             </section>

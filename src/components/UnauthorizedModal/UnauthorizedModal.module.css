@@ -1,0 +1,276 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 20px;
+    backdrop-filter: blur(4px);
+}
+
+.modalContent {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
+    border-radius: 16px;
+    max-width: 600px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.closeButton {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.closeButton:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+.closeButton img {
+    width: 14px;
+    height: 14px;
+    filter: invert(1);
+}
+
+.closeButton svg {
+    width: 14px;
+    height: 14px;
+}
+
+.modalBody {
+    padding: 48px 40px;
+    text-align: center;
+}
+
+.iconContainer {
+    margin-bottom: 24px;
+    color: #1db954;
+}
+
+.iconContainer i {
+    font-size: 48px;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 24px 0;
+    letter-spacing: -0.5px;
+}
+
+.message {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #b3b3b3;
+    margin: 0 0 16px 0;
+}
+
+.message strong {
+    color: #1db954;
+    font-weight: 600;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 32px 0 24px 0;
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.divider span {
+    padding: 0 16px;
+}
+
+.guestButton {
+    background: linear-gradient(135deg, #1db954 0%, #1ed760 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 24px;
+    padding: 14px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(29, 185, 84, 0.3);
+    width: 100%;
+    max-width: 280px;
+}
+
+.guestButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(29, 185, 84, 0.4);
+    background: linear-gradient(135deg, #1ed760 0%, #1db954 100%);
+}
+
+.guestButton:active {
+    transform: translateY(0);
+}
+
+.guestNote {
+    font-size: 13px;
+    color: #888;
+    margin: 12px 0 0 0;
+    font-style: italic;
+}
+
+.thankYou {
+    font-size: 16px;
+    color: #ffffff;
+    margin: 24px 0 0 0;
+    font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .modalOverlay {
+        padding: 16px;
+    }
+
+    .modalContent {
+        max-width: 100%;
+        border-radius: 12px;
+    }
+
+    .modalBody {
+        padding: 40px 24px;
+    }
+
+    .title {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .message {
+        font-size: 15px;
+    }
+
+    .iconContainer i {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modalOverlay {
+        padding: 12px;
+    }
+
+    .modalBody {
+        padding: 32px 20px;
+    }
+
+    .title {
+        font-size: 22px;
+        margin-bottom: 16px;
+    }
+
+    .message {
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
+
+    .divider {
+        margin: 24px 0 20px 0;
+        font-size: 13px;
+    }
+
+    .guestButton {
+        font-size: 15px;
+        padding: 12px 28px;
+    }
+
+    .guestNote {
+        font-size: 12px;
+    }
+
+    .thankYou {
+        font-size: 15px;
+        margin-top: 20px;
+    }
+
+    .closeButton {
+        width: 32px;
+        height: 32px;
+        top: 12px;
+        right: 12px;
+    }
+
+    .closeButton img {
+        width: 12px;
+        height: 12px;
+    }
+
+    .iconContainer i {
+        font-size: 36px;
+    }
+}
+
+/* Landscape mobile devices */
+@media (max-height: 600px) and (orientation: landscape) {
+    .modalBody {
+        padding: 24px 32px;
+    }
+
+    .title {
+        font-size: 20px;
+        margin-bottom: 12px;
+    }
+
+    .message {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .iconContainer {
+        margin-bottom: 16px;
+    }
+
+    .iconContainer i {
+        font-size: 32px;
+    }
+
+    .thankYou {
+        margin-top: 16px;
+    }
+}

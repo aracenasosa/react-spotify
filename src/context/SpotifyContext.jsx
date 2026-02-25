@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { UserProfile } from '../hooks/hook';
 import { exchangeCodeForToken, refreshAccessToken } from '../components/Login/spotifyAuth';
+import { isGuestMode, activateGuestMode, clearGuestMode, initializeMode } from '../helpers/sessionManager';
 
 import { useHistory } from 'react-router-dom';
 
@@ -20,12 +21,24 @@ export const SpotifyProvider = ({ children }) => {
     const [refreshToken, setRefreshToken] = useState(localStorage.getItem('refresh_token') || '');
     const [expiresAt, setExpiresAt] = useState(parseInt(localStorage.getItem('expires_at')) || 0);
     const [search, setSearch] = useState('');
+    // Initialize isGuest directly from localStorage to avoid race condition
+    const [isGuest, setIsGuest] = useState(isGuestMode());
+
+    // Keep isGuest in sync with localStorage changes
+    useEffect(() => {
+        const mode = initializeMode();
+        setIsGuest(mode === 'guest');
+    }, []);
 
     const { data: user, loading: userLoading, err: userError } = UserProfile(token);
 
     const saveTokenData = useCallback((data) => {
         const { access_token, refresh_token, expires_in } = data;
         const expiryTime = Date.now() + expires_in * 1000;
+
+        // Clear guest mode when authenticating
+        clearGuestMode();
+        setIsGuest(false);
 
         setToken(access_token);
         localStorage.setItem('token', access_token);
@@ -105,8 +118,37 @@ export const SpotifyProvider = ({ children }) => {
         setToken('');
         setRefreshToken('');
         setExpiresAt(0);
+        setIsGuest(false);
         window.location.href = '/';
     };
+
+    const handleActivateGuestMode = useCallback(() => {
+        // Clear any existing auth tokens when entering guest mode
+        localStorage.removeItem('token');
+        localStorage.removeItem('refresh_token');
+        localStorage.removeItem('expires_at');
+        sessionStorage.clear();
+        
+        setToken('');
+        setRefreshToken('');
+        setExpiresAt(0);
+        
+        // Activate guest mode
+        activateGuestMode();
+        setIsGuest(true);
+        
+        // Redirect to home page
+        window.location.href = '/home';
+    }, []);
+
+    const exitGuestMode = useCallback(() => {
+        clearGuestMode();
+        setIsGuest(false);
+        // Clear any guest-related state
+        setSearch('');
+        // Redirect to login
+        window.location.href = '/';
+    }, []);
 
     const value = {
         token,
@@ -122,7 +164,10 @@ export const SpotifyProvider = ({ children }) => {
         canGoForward,
         setCanGoForward,
         search,
-        setSearch
+        setSearch,
+        isGuest,
+        activateGuestMode: handleActivateGuestMode,
+        exitGuestMode
     };
 
     return (

@@ -162,7 +162,9 @@ const Playlist = ({ match: { params: { id } } }) => {
                     </section>
 
                 </section>
-                : <i className={cx('fas fa-sync fa-spin fa-8x', Style.loading)}></i>}
+                : <div style={{ textAlign: 'center', width: '100%', paddingTop: '100px' }}>
+                    <i className="fas fa-sync fa-spin fa-8x" style={{ color: '#fff' }}></i>
+                  </div>}
 
         </main>
     )
