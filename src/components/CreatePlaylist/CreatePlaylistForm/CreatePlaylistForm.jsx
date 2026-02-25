@@ -1,18 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Style from './CreatePlaylistForm.module.css';
-import Nav from '../Nav/Nav';
-import { UserProfile, AddPlaylist } from '../../../hooks/hook';
+import Nav from '../../Nav/Nav.jsx';
+import { AddPlaylist } from '../../../hooks/hook';
 import { Link } from 'react-router-dom';
 import User from '../../../assets/user.jpeg';
-import arrowUp from '../../../assets/arrowUp.svg';
-import arrowDown from '../../../assets/arrowDown.svg';
+import UserProfileHeader from '../../UserProfileHeader/UserProfileHeader';
 import Spotify from '../../../assets/spotifyIcon.svg';
 import { withRouter } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
-const CreatePlaylistForm = ({ stateLink, setStateLink, stateLink2, setStateLink2, stateLink3, setStateLink3, history, token, tokenAuth }) => {
+import { useSpotify } from '../../../context/SpotifyContext';
 
-    const { data: user, loading: userLoading, err: errLoading } = UserProfile(tokenAuth);
-    const [arrow, setArrow] = useState(false);
+const CreatePlaylistForm = ({ history }) => {
+
+    const { token, user } = useSpotify();
 
     const [data, setData] = useState({
         name: '',
@@ -22,15 +23,12 @@ const CreatePlaylistForm = ({ stateLink, setStateLink, stateLink2, setStateLink2
 
     const { data: result, loading: userresult, err: errResult } = AddPlaylist(
         user ? user.id : '', 
-        tokenAuth, 
+        token, 
         data.name ? data.name : '', 
         data.description ? data.description : '', 
         data.state
         );
 
-   console.log(result, 'result');
-    console.log(userresult, 'err');
-    //console.log(history, 'his');
 
     const Submit = e => {
         e.preventDefault();
@@ -53,41 +51,21 @@ const CreatePlaylistForm = ({ stateLink, setStateLink, stateLink2, setStateLink2
         }
     };
 
-    if(result.status === 201 && result.ok === true) { history.push(`/createPlaylist/${localStorage.getItem('token')}`) }
+    useEffect(() => {
+        if (result && result.status === 201) {
+            toast.success('Playlist created!', { position: toast.POSITION.BOTTOM_CENTER, autoClose: 2000 });
+            history.push(`/home`);
+        }
+    }, [result, history]);
 
     return (
         <main className={Style.container}>
             <section>
-                <Nav
-                    stateLink={stateLink}
-                    setStateLink={setStateLink}
-                    stateLink2={stateLink2}
-                    setStateLink2={setStateLink2}
-                    stateLink3={stateLink3}
-                    setStateLink3={setStateLink3}
-                    token={token}
-                    tokenAuth={tokenAuth}
-                />
+                <Nav />
             </section>
             <section className={Style.createForm}>
 
-            <section className={Style.section_0}>
-                    <section className={Style.user} onClick={() => setArrow(!arrow)} style={{ background: arrow ? 'rgba(151,151,151, .3)' : '', width: user.display_name !== undefined ? user.display_name.length > 16 ? '210px' : '196px' : '' }}>
-                        <img className={Style.userImg} src={user.images && user.images.length > 0 ? user.images[0].url : User} alt={user.display_name} />
-                        <p>{user.display_name ? user.display_name.substring(0, 16) : 'Not Available'} <span style={{ display: user.display_name && user.display_name !== undefined ? user.display_name.length > 16 ? 'inline' : 'none' : 'none', color: '#fff' }}>...</span></p>
-                        <img className={Style.arrow} src={arrow ? arrowUp : arrowDown} alt={user.display_name} />
-                    </section>
-                    <div className={Style.modal} style={{ display: arrow ? 'block' : 'none' }}>
-                        <a href={`/userProfile/${localStorage.getItem('token')}`} style={{ textDecoration: 'none' }}>
-                            <p>Account</p>
-                        </a>
-                        <hr className={Style.hr} />
-                        <Link to={`/`} style={{ textDecoration: 'none' }}>
-                            <p>Log out</p>
-                        </Link>
-                    </div>
-
-                </section>
+                <UserProfileHeader />
 
                 <section>
                     <h2 className={Style.h2}>Create a Playlist</h2>

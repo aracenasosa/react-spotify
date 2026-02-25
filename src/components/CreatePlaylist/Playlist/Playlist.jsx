@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Style from './Playlist.module.css';
 import { Link } from 'react-router-dom';
 import User from '../../../assets/user.jpeg';
-import { RemovePlaylist } from '../../../hooks/hook';
-import axios from 'axios';
+import { DeletePlaylist } from '../../../hooks/hook';
+import { toast } from 'react-toastify';
 
-const Playlist = ({ playlist, tokenAuth }) => {
+const Playlist = ({ playlist, token, setTrigger }) => {
+    const [deleteId, setDeleteId] = useState('');
+    const { data: deleteData, loading: deleteLoading } = DeletePlaylist(deleteId, token);
+
+    useEffect(() => {
+        if (deleteId && deleteData && deleteData.status === 200) {
+            toast.info('Playlist deleted', { position: toast.POSITION.BOTTOM_CENTER, autoClose: 2000 });
+            setTrigger(prev => !prev);
+        }
+    }, [deleteData, deleteId, setTrigger]);
 
     //console.log(playlist);
 
@@ -16,8 +25,18 @@ const Playlist = ({ playlist, tokenAuth }) => {
 
                 <h4>{playlist ? playlist.name.substring(0, 19) : ''} <span style={{ display: playlist ? playlist.name.length > 19 ? 'inline' : 'none' : '', color: '#fff' }}>...</span></h4>
 
-                <div className={Style.flex}>
-                    <a className={Style.btnEdit} href={`/editPlaylist/${playlist.id}/${localStorage.getItem('token')}`}>Edit</a>
+                <div className={Style.btnFlex}>
+                    <a className={Style.btnEdit} href={`/editPlaylist/${playlist.id}`}>Edit</a>
+                    <button 
+                        className={Style.btnDelete} 
+                        onClick={() => {
+                            if (window.confirm('Delete this playlist?')) {
+                                setDeleteId(playlist.id);
+                            }
+                        }}
+                    >
+                        Delete
+                    </button>
                 </div>
 
             </section>

@@ -32,11 +32,25 @@
   text-decoration: none;
 }
 
-.form a:hover {
+.form a:hover,
+.form button.loginButton:hover {
   cursor: pointer;
   background: rgb(12, 182, 77);
   transition: all 0.5s ease;
   transform: translateY(1px) scale(1.1);
+}
+
+.form button.loginButton {
+  margin: 40px 0 0 0;
+  padding: 10px 120px;
+  border-radius: 50px;
+  background: rgb(24, 216, 96);
+  color: #fff;
+  outline: none;
+  border: none;
+  transition: all 0.5s ease;
+  font: inherit;
+  cursor: pointer;
 }
 
 .App_logo {
@@ -65,7 +79,8 @@
     width: 300px;
   }
 
-  .form a {
+  .form a,
+  .form button.loginButton {
     padding: 10px 80px;
   }
 }
@@ -75,7 +90,8 @@
     width: 200px;
   }
 
-  .form a {
+  .form a,
+  .form button.loginButton {
     padding: 10px 40px;
   }
 }
@@ -85,7 +101,8 @@
     width: 120px;
   }
 
-  .form a {
+  .form a,
+  .form button.loginButton {
     padding: 10px 20px;
   }
 

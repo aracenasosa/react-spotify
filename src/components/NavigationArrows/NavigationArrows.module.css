@@ -1,0 +1,45 @@
+.leftRight {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+.arrowCircle {
+  background: rgba(0, 0, 0, 0.7);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.2s ease, transform 0.1s ease;
+  cursor: pointer;
+}
+
+.arrowCircle:hover {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.arrowCircle:active {
+  transform: scale(0.9);
+}
+
+.arrowCircle img {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1);
+}
+
+@media screen and (max-width: 830px) {
+  .arrowCircle {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .arrowCircle img {
+    width: 14px;
+    height: 14px;
+  }
+}

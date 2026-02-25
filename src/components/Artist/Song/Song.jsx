@@ -1,37 +1,49 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Style from './Song.module.css';
 import greenHeart from '../../../assets/greenHeart.svg';
 import cx from 'classnames';
 import {LikedSongsApi, DeleteLikedSongApi, SaveTracks} from '../../../hooks/hook';
 
-const Song = ({ track, idx, setId, setId2, userPlaylist, setPlaylist, tokenAuth, idliked, idliked2}) => {
+const Song = ({ track, idx, userPlaylist, token, idliked, idliked2, setPlaylist, setId, setId2, refreshLiked }) => {
 
-    const [play, setPlay] = useState(true);
     const [option, setOption] = useState(false);
-    const { data, loading, err } = LikedSongsApi(tokenAuth, idliked, idliked2);
-    const { data: saveTracks, loading: saveTracksLoading, err: errsaveTracks } = SaveTracks(idliked, tokenAuth);
+    const optionsRef = useRef(null);
+    const { data, loading, err } = LikedSongsApi(token, refreshLiked);
     let liked = false;
     let map = [];
     let recorrer = [];
-    const Refresh = () => 
-    {
+
+    const Refresh = () => {
         recorrer = data ? data.map(songs => map.push(songs.track.id)) : '';
-        liked = map ? map.includes(track.id) : 'na'; 
+        liked = map ? map.includes(track ? track.id : '') : 'na';
     };
     Refresh();
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (optionsRef.current && !optionsRef.current.contains(event.target)) {
+                setOption(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
     return (
-        <section className={Style.card}>
-            <div className={Style.doblao}>
-                <span className={Style.number}>{idx + 1}</span>
-                <iframe src={`https://open.spotify.com/embed?uri=${track.uri}`} width={play ? '80' : '470'} height="80" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                <div className={Style.space}>
-                    <p className={Style.songName} style={{ display: play ? 'block' : 'none' }} > {track.name} </p>
-                    <p className={Style.e} style={{ display: track && play ? track.explicit ? 'block' : 'none' : 'none' }}>E</p>
-                </div>
-            </div>
-            <p className={Style.albumName}>{track.album.name}</p>
-            <div className={Style.doblao2}>
+        <section className={Style.main} >
+            <iframe 
+                src={`https://open.spotify.com/embed/track/${track.id}?utm_source=generator&theme=0`} 
+                width="100%" 
+                height="152" 
+                frameBorder="0" 
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                loading="lazy"
+                title={track.name}
+            ></iframe>
+
+            <div className={Style.controls}>
                 
                 { liked ? <i className={cx("fas fa-heart", Style.greenHeartFull)} onClick={() => setId2(track.id)}></i> : 
                  <i className={cx("far fa-heart", Style.greenHeart)} onClick={() => setId(track.id)}></i>
@@ -44,22 +56,24 @@ const Song = ({ track, idx, setId, setId2, userPlaylist, setPlaylist, tokenAuth,
                     <div className={Style.circle}></div>
                     <div className={Style.circle}></div>
                 </div>
-                <div className={Style.options} style={{ display: option ? 'block' : 'none' }}>
-                <i className={cx("fas fa-times", Style.x)} onClick={() => setOption(!option)}></i>
-                    <p>{userPlaylist && userPlaylist.length > 0 ? userPlaylist.map(playlist => (
-                        <p className={Style.playlistName}
+
+                <div ref={optionsRef} className={Style.options} style={{ display: option ? 'block' : 'none' }}>
+                    <div className={Style.xContainer}>
+                        <i className={cx("fas fa-times", Style.x)} onClick={() => setOption(false)}></i>
+                    </div>
+                    {userPlaylist && userPlaylist.length > 0 ? userPlaylist.map((playlist, pIdx) => (
+                        <p className={Style.playlistName} key={pIdx}
                             onClick={() => {
                                 setPlaylist({ id: playlist ? playlist.id : '', uri: track ? track.uri : '' });
-                                setOption(!option);
+                                setOption(false);
                             }}>
                             {playlist ? playlist.name : ''}
                         </p>
-                    )) : ''}
-                    </p>
+                    )) : <p className={Style.playlistName}>No Playlists Found</p>}
                 </div>
             </div>
         </section>
     )
 }
 
-export default Song
+export default Song;

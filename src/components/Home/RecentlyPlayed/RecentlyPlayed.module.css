@@ -1,15 +1,18 @@
 .artistImg {
-  width: 140px;
-  height: 140px;
+  width: 90%;
+  aspect-ratio: 1 / 1;
   border-radius: 50%;
-  margin: auto;
+  margin: 0 auto;
+  object-fit: cover;
 }
 
 .card {
   background: rgb(24, 24, 24);
   padding: 10px;
-  width: 170px;
-  height: 260px;
+  width: 100%;
+  max-width: 220px;
+  min-width: 160px;
+  height: 280px;
   display: flex;
   flex-flow: wrap column;
   border-radius: 5px;
@@ -37,15 +40,17 @@
 }
 
 .marginContainer {
-  margin-left: 25px;
+  margin-left: 0;
 }
 
-@media screen and (max-width: 1772px) {
+@media screen and (max-width: 450px) {
   .card {
-    width: 190px;
+    max-width: 280px;
+    height: auto;
+    min-height: auto;
   }
-
-  .card h4 {
-      font-size: 15px;
+  
+  .artistImg {
+    width: 80%;
   }
 }

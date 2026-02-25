@@ -1,22 +1,24 @@
 
 .artistImg {
-    width: 140px;
-    height: 140px;
+    width: 90%;
+    aspect-ratio: 1 / 1;
     border-radius: 5px;
-    margin: auto;
+    margin: 0 auto;
+    object-fit: cover;
 }
 
 .card {
     background: rgb(24,24,24);
     padding: 10px;
-    width: 170px;
+    width: 100%;
+    max-width: 170px;
     height: 260px;
     display: flex;
     flex-flow: wrap column;
     border-radius: 5px;
     transition: all .5s ease;
     overflow: hidden;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 .card:hover {
@@ -37,8 +39,18 @@
     font-size: 13px;
 }
 
-.marginContainer {
-    margin-left: 25px;
+@media screen and (max-width: 450px) {
+  .card {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    min-height: auto;
+    margin: 0 auto 0 auto;
+  }
+  
+  .artistImg {
+    width: 80%;
+  }
 }
 
 

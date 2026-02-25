@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+# Spotify Clone - React application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A professional, full-featured Spotify clone built with React and the Spotify Web API. This project demonstrates modern frontend practices, including state management with Context API, custom hooks for API interaction, and a responsive UI.
 
-## Available Scripts
+## 🚀 Key Features
 
-In the project directory, you can run:
+- **Spotify Authentication**: Seamless login flow using PKCE-based authorization.
+- **Dynamic Navigation**: "Smart" navigation arrows with global history tracking to manage back/forward states across sessions.
+- **Search & Discovery**: Explore artists, albums, playlists, and tracks with real-time search and category browsing.
+- **Personal Library**: Access your playlists, liked songs, and recently played tracks.
+- **Playlist Management**: Create, edit, and delete playlists directly through the interface.
+- **Interactive Player Integration**: Embedded Spotify players for albums and artists.
+- **Real-time Feedback**: Toast notifications for user actions (CRUD operations, likes).
 
-### `npm start`
+## 🛠️ Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **Frontend**: React (Hooks, Context API)
+- **Routing**: React Router DOM (v5)
+- **API Interaction**: Axios & Custom Hooks
+- **Styling**: CSS Modules
+- **Authentication**: Spotify OAuth 2.0 (PKCE)
+- **Additional Tools**:
+  - `react-toastify` for notifications
+  - `classnames` for dynamic styling
+  - `react-countup` for animated statistics
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 🏗️ Architecture & Design Patterns
 
-### `npm test`
+The project follows a modular architecture designed for scalability and maintainability:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 1. Context API State Management
 
-### `npm run build`
+Located in `src/context/SpotifyContext.jsx`, this layer manages:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Global authentication tokens.
+- User profile data.
+- **Global History Tracking**: Custom logic to track navigation history for the navigation arrows, ensuring they accurately reflect session state.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 2. Custom Hooks
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+All API interactions logic is encapsulated in `src/hooks/hook.js`, promoting reusability and clean separation of concerns between UI components and data fetching.
 
-### `npm run eject`
+### 3. Component Hierarchy
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- **Nav**: Sidebar navigation using `useLocation` for active link highlights without prop drilling.
+- **Collection Views**: Standardized views for playlists, artists, and albums for a consistent UX.
+- **Creation Flows**: Dedicated forms for interactive playlist management.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🏁 Getting Started
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Prerequisites
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Node.js (v14+)
+- A Spotify Developer Account (for API credentials)
 
-## Learn More
+### Installation
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. **Clone the repository**:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+   ```bash
+   git clone https://github.com/aracenasosa/react-spotify.git
+   cd react-spotify
+   ```
 
-### Code Splitting
+2. **Install dependencies**:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+   ```bash
+   npm install
+   ```
 
-### Analyzing the Bundle Size
+3. **Configure Spotify API**:
+   Open `src/components/Login/authorizeConf.js` and add your `clientId`:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+   ```javascript
+   export const clientId = "YOUR_CLIENT_ID";
+   export const redirectUri = "http://localhost:3000/home"; // Or your production URL
+   ```
 
-### Making a Progressive Web App
+4. **Start the development server**:
+   ```bash
+   npm start
+   ```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 📜 Available Scripts
 
-### Advanced Configuration
+- `npm start`: Runs the app in development mode.
+- `npm test`: Launches the test runner.
+- `npm run build`: Builds the app for production.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+---
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+_Built with ❤️ by [Carlos Aracena](https://github.com/aracenasosa)_

@@ -6,7 +6,7 @@ import User from '../../../assets/user.jpeg';
 const Playlist = ({playlist}) => {
     return (
         <section className={Style.marginContainer}>
-        <a href={`/playlist/${playlist.id}/${localStorage.getItem('token')}`} style={{ textDecoration: 'none' }}>
+        <a href={`/playlist/${playlist.id}`} style={{ textDecoration: 'none' }}>
             <section className={Style.card}>
             <img className={Style.artistImg} src={playlist.images && playlist.images.length > 0 ? playlist.images[0].url : User} alt={playlist ? playlist.name : ''} />
 

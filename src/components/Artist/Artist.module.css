@@ -1,129 +1,169 @@
 .container {
   display: grid;
-  grid-template-columns: 12% 88%;
+  grid-template-columns: 12vw 1fr;
+  background-color: #121212;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .header {
   width: 100%;
-  height: 35vh;
+  height: min-content;
+  min-height: 40vh;
 }
 
 .main {
-  background: rgb(78, 64, 59);
-  background: linear-gradient(
-    180deg,
-    rgba(78, 64, 59, 1) 13%,
-    rgba(32, 32, 33, 1) 28%
-  );
-  height: 100%;
+  background-color: #121212;
+  min-height: 100vh;
   width: 100%;
 }
 
 .overlay {
-  background: rgba(78, 64, 59, 0.9); /*rgba( 202, 110, 5, .9 )*/
+  background: linear-gradient(
+    180deg,
+    rgba(30, 30, 30, 1) 0%,
+    rgba(18, 18, 18, 0.4) 50%,
+    rgba(18, 18, 18, 1) 100%
+  );
   width: 100%;
   height: 100%;
+  padding-bottom: 2rem;
   display: flex;
-  flex-flow: column wrap;
-  justify-content: flex-start;
+  flex-direction: column;
 }
 
 .innerText {
-  width: 80%;
-  margin: 0 0 40px 40px;
+  width: 100%;
+  padding: 0 40px;
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bottomInfo {
+  margin-top: auto;
 }
 
 .innerText h1 {
-  font-size: 90px;
+  font-size: clamp(30px, 8vw, 85px);
+  margin: 0;
+  padding: 0;
+  color: #fff;
   font-weight: bold;
-  color: #fff;
 }
 
-.innerText p {
-  font-size: 15px;
-  color: #fff;
+.content {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  width: 100%;
+  flex-wrap: wrap;
 }
 
-.innerText div > span {
-  margin-left: 5px;
+.textContainer {
+  flex: 1;
+  min-width: 300px;
 }
 
-.innerText > div {
-  font-size: 12px;
-  color: #fff;
+.artistCover {
+  width: clamp(200px, 20vw, 260px);
+  height: auto;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  -webkit-box-shadow: 0px 4px 60px rgba(0,0,0,.5);
+  box-shadow: 0px 4px 60px rgba(0,0,0,.5);
+}
+
+.verifiedContainer {
   display: flex;
   align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
 }
 
-.section_a {
-  width: 95%;
-}
-
-.section_a h1,
-.section_b h1,
-.section_c h1,
-.section_d h1 {
-  font-size: 25px;
+.verifiedContainer span {
+  font-weight: bold;
+  font-size: 0.85rem;
   color: #fff;
-  margin-bottom: 20px;
+}
+
+.followers {
+  color: #fff;
+  font-weight: bold;
+  margin-top: 10px;
+  font-size: clamp(14px, 2vw, 18px);
 }
 
 .section_a,
 .section_b,
 .section_c,
 .section_d {
-  margin: 80px 0 40px 40px;
+  padding: 40px;
 }
 
+.section_a h1,
+.section_b h1,
+.section_c h1,
+.section_d h1 {
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.songContainer,
 .discographyContainer,
 .fansLikeContainer,
 .appearContainer {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
 }
 
 .artistImg {
-  width: 160px;
-  height: 160px;
-  border-radius: 2px;
-  margin: auto;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 4px;
+  object-fit: cover;
 }
 
-.discography {
+.discography, .cardLike, .appear {
   background: rgb(24, 24, 24);
-  padding: 10px;
-  width: 190px;
-  height: 270px;
+  padding: 15px;
   display: flex;
-  flex-flow: wrap column;
-  border-radius: 5px;
-  transition: all 0.5s ease;
+  flex-direction: column;
+  border-radius: 8px;
+  transition: background 0.3s ease, transform 0.3s ease;
+  height: 100%;
+  overflow: hidden;
 }
 
-.discography:hover {
+.discography:hover, .cardLike:hover, .appear:hover {
   background: rgb(40, 40, 40);
   cursor: pointer;
-  transform: translateY(-1px) scale(1.1);
-  transition: all 0.5s ease;
+  transform: translateY(-5px);
 }
 
-.discography h4 {
-  margin: 10px 0 0px 0;
+.discography h4, .cardLike h4, .appear h4 {
+  margin: 15px 0 5px 0;
   color: #fff;
+  font-size: 16px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.discography span {
+.discography span, .cardLike p, .appear span {
   color: rgb(144, 144, 144);
-  margin: 5px 0 25px 0;
   font-size: 14px;
-  text-transform: capitalize;
 }
 
-.discograpyText {
+.discograpyText, .appearText {
   display: flex;
-  flex-flow: row wrap;
   align-items: center;
-  justify-content: flex-start;
+  gap: 5px;
 }
 
 .circle {
@@ -131,114 +171,41 @@
   width: 4px;
   background: rgb(144, 144, 144);
   border-radius: 50%;
-  margin: 0 5px 15px 5px;
 }
 
 .imgLike {
-  width: 160px;
-  height: 160px;
+  width: 100%;
+  aspect-ratio: 1/1;
   border-radius: 50%;
-  margin: auto;
-}
-
-.cardLike {
-  background: rgb(24, 24, 24);
-  padding: 10px;
-  width: 180px;
-  height: 270px;
-  display: flex;
-  flex-flow: wrap column;
-  border-radius: 5px;
-  transition: all 0.5s ease;
-  overflow: hidden;
-}
-
-.cardLike:hover {
-  background: rgb(40, 40, 40);
-  cursor: pointer;
-  transform: translateY(-1px) scale(1.1);
-  transition: all 0.5s ease;
-}
-
-.cardLike h4 {
-  margin: 10px 0 0px 0;
-  color: #fff;
-}
-
-.cardLike p {
-  color: rgb(144, 144, 144);
-  margin: 5px 0 25px 0;
+  object-fit: cover;
 }
 
 .see {
   color: rgb(184, 184, 184);
-  margin: 30px 0 0 5px;
+  margin-top: 20px;
   font-size: 14px;
   font-weight: bold;
-  letter-spacing: 1px;
-  transition: all 0.3s ease;
+  text-transform: uppercase;
   display: inline-block;
+  cursor: pointer;
 }
 
 .see:hover {
   color: #fff;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.appearImg {
-  width: 160px;
-  height: 160px;
-  border-radius: 2px;
-  margin: auto;
-}
-
-.appear {
-  background: rgb(24, 24, 24);
-  padding: 10px;
-  width: 180px;
-  height: 270px;
-  display: flex;
-  flex-flow: wrap column;
-  border-radius: 5px;
-  transition: all 0.5s ease;
-}
-
-.appear:hover {
-  background: rgb(40, 40, 40);
-  cursor: pointer;
-  transform: translateY(-1px) scale(1.1);
-  transition: all 0.5s ease;
-}
-
-.appear h4 {
-  margin: 10px 0 0px 0;
-  color: #fff;
-}
-
-.appear span {
-  color: rgb(144, 144, 144);
-  margin: 5px 0 25px 0;
-  font-size: 14px;
-  text-transform: capitalize;
-}
-
-.appearText {
-  display: flex;
-  flex-flow: row wrap;
-  align-items: center;
-  justify-content: flex-start;
+  text-decoration: underline;
 }
 
 .arrows {
-  margin: 20px 0 100px 0;
+  padding: 20px 0;
   display: flex;
   justify-content: space-between;
-  width: 85vw;
+  align-items: center;
+  width: 100%;
+  gap: 15px;
 }
 
 .leftRight img {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(4, 4, 4, 0.4);
   border-radius: 50%;
   padding: 5px;
   margin-right: 10px;
@@ -248,224 +215,48 @@
   cursor: pointer;
 }
 
-.title {
-  font-size: 14px;
+
+/* RESPONSIVE BREAKPOINTS SYNCHRONIZED WITH NAV */
+
+@media screen and (max-width: 1407px) {
+  .container {
+    grid-template-columns: 20% 1fr;
+  }
 }
 
-.section_0 {
-  width: 210px;
-}
 
-.user {
-  background: rgb(5, 5, 5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 20px;
-  margin: 0px 15px 0 auto;
-  height: 35px;
-}
 
-.user:hover {
-  cursor: pointer;
-  background: rgba(40, 40, 40);
-}
 
-.user p {
-  color: #fff;
-  font-weight: bold;
-  margin: 0 5px;
-  font-size: 16px;
-}
 
-.userImg {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-}
 
-.arrow {
-  width: 22px;
-  height: 22px;
-  margin-left: 3px;
-}
 
-.modal {
-  background: rgb(40, 40, 40);
-  width: 197px;
-  margin: 10px 15px 0 auto;
-  display: flex;
-  z-index: 2;
-  justify-content: center;
-  align-items: center;
-  flex-flow: wrap column;
-  padding: 5px;
-  border-radius: 5px;
-  position: absolute;
-  right: 0;
-}
-
-.modal p {
-  color: rgb(151, 151, 151);
-  font-weight: bold;
-  padding: 8px 10px;
-  border-radius: 5px;
-}
-
-.modal p:hover {
-  background: rgba(151, 151, 151, 0.3);
-  cursor: pointer;
-}
-
-.hr {
-  margin: 20px 0 0 0;
-  border: 1px solid rgba(151, 151, 151, 0.2);
-  width: 100%;
-}
-
-@media screen and (max-width: 1774px) {
-  .discographyContainer,
-  .fansLikeContainer,
-  .appearContainer {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
+@media screen and (max-width: 830px) {
+  .container {
+    grid-template-columns: 1fr;
+    display: block;
+  }
+  .innerText {
+    padding-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .innerText > div {
+    justify-content: center;
+  }
+  .arrows {
+    flex-direction: column-reverse;
     gap: 10px;
-  }
-
-  .arrows {
-    width: 100%;
+    padding-top: 0;
   }
 }
-
-@media screen and (max-width: 1630px) {
-  .discographyContainer,
-  .fansLikeContainer,
-  .appearContainer {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-  }
-}
-
-@media screen and (max-width: 1410px) {
-  .discographyContainer,
-  .fansLikeContainer,
-  .appearContainer {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-  }
-}
-
-@media screen and (max-width: 1200px) {
-  .discographyContainer,
-  .fansLikeContainer,
-  .appearContainer {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .innerText {
-    width: 90%;
-  }
-
-  .container {
-    grid-template-columns: 15% 85%;
-  }
-}
-
-@media screen and (max-width: 955px) {
-  .discographyContainer,
-  .fansLikeContainer,
-  .appearContainer {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-  }
-
+@media screen and (max-width: 375px) {
   .innerText h1 {
-    font-size: 70px;
+    font-size: 32px;
   }
-
-  .arrows {
-    margin: 20px 0 100px 0;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-
   .innerText {
-    width: 90%;
-    margin: 0 0 40px 40px;
-  }
-
-  .container {
-    grid-template-columns: 20% 80%;
-  }
-
-  .songContainer {
-    width: 95%;
-  }
-
-  .main {
-    width: 100%;
-  }
-
-  .section_a {
-    grid-template-columns: 1fr;
-    margin: 80px 0 40px 10px;
-  }
-}
-
-@media screen and (max-width: 869px) {
-  .container {
-    grid-template-columns: 25% 75%;
-  }
-
-  .discographyContainer,
-  .fansLikeContainer,
-  .appearContainer {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    width: 95%;
-  }
-
-  .innerText h1 {
-    font-size: 50px;
-  }
-
-  .innerText {
-    width: 80%;
-    margin: 0 0 40px 10px;
-  }
-}
-
-@media screen and (max-width: 596px) {
-  .container {
-    grid-template-columns: 30% 70%;
-  }
-
-  .innerText h1 {
-    font-size: 30px;
-  }
-
-  .innerText {
-    margin: auto;
-  }
-
-  .discographyContainer,
-  .fansLikeContainer,
-  .appearContainer {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-  }
-
-  .arrows {
-    display: flex;
-    flex-flow: column wrap;
-  }
-
-}
-
-@media screen and (max-width: 495px) {
-  .container {
-    grid-template-columns: 1fr;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }

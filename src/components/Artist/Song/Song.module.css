@@ -1,58 +1,24 @@
-.card {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  color: rgb(232, 233, 233, 0.8);
-  transition: all 0.3s ease;
-  border-radius: 5px;
-  overflow: hidden;
+.border {
+  border: 1px solid rgba(250, 249, 249, 0.7);
 }
 
-.card:hover {
-  background: rgb(41, 44, 45);
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.section_a {
-  margin-bottom: 60px;
-  width: 90%;
-}
-
-.card img {
-  width: 45px;
-  height: 45px;
-  margin: 5px 0;
-}
-
-.doblao,
-.doblao2 {
+.flex {
   display: flex;
-  justify-content: flex-start;
+  margin: 10px 0;
   align-items: center;
-  text-align: center;
-  margin: 5px 0;
 }
 
-.space {
+.flex iframe {
+  border-radius: 12px;
+  width: 100%;
+}
+
+.inner {
   display: flex;
-  flex-flow: wrap column;
-  align-items: flex-start;
-  justify-content: center;
-  margin-left: 16px;
 }
 
-.card div span {
-  margin: 0 15px 0 0;
-  height: 20px;
-  width: 20px;
-  text-align: center;
-  transition: all 0.3s ease;
-  font-weight: bold;
-}
-
-.card div span:hover {
-  color: #fff;
-  transition: all 0.3s ease;
+.containerLeft {
+  margin: 17px 0 0 15px;
 }
 
 .e {
@@ -62,217 +28,187 @@
   padding: 2px 6px;
   border-radius: 2px;
   font-weight: bold;
+  margin-right: 5px;
 }
 
-.songName {
-  color: #fff;
-  font-weight: bold;
+.main {
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
-.albumName {
-  transition: all 0.3s ease;
-  align-self: center;
-  text-align: center;
-}
-
-.albumName:hover {
-  color: #fff;
-  transition: all 0.3s ease;
-}
-
-.duration {
-  transition: all 0.3s ease;
-  align-self: center;
-  text-align: center;
-}
-
-.duration:hover {
-  color: #fff;
-  transition: all 0.3s ease;
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 5px;
+  position: relative;
 }
 
 .greenHeart {
-  color: rgba(236, 240, 241, 0.7);
-  margin-right: 15px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.2rem;
+  cursor: pointer;
 }
 
 .greenHeartFull {
   color: rgb(29, 185, 84);
-  margin-right: 15px;
+  font-size: 1.2rem;
+  cursor: pointer;
 }
 
 .circleContainer {
   display: flex;
-  margin-left: 50px;
   padding: 10px;
 }
 
 .circle {
   width: 3px;
   height: 3px;
-  background: rgba(236, 240, 241, 1);
+  background: #fff;
   border-radius: 50%;
   margin: 0 2px;
 }
 
 .options {
-  background: rgb(40, 40, 40);
-  padding: 5px 5px 5px 10px;
-  border-radius: 5px;
+  background: rgb(24, 24, 24);
+  padding: 8px 0;
+  border-radius: 4px;
   color: #fff;
   text-align: left;
   position: absolute;
-  right: 450px;
-  z-index: 0;
+  right: 0;
+  top: 100%;
+  width: 200px;
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 16px 24px rgba(0,0,0,.3), 0 6px 8px rgba(0,0,0,.2);
+}
+
+.options::-webkit-scrollbar {
+  width: 8px;
+}
+
+.options::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.options::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .playlistName {
-  padding: 8px;
-  border-radius: 5px;
+  padding: 12px 16px;
+  border-radius: 0;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .playlistName:hover {
-  background: rgba(149, 165, 166, 0.3);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .playlistName:first-child {
-  border-bottom: 1px solid rgba(149, 165, 166, 0.3);
-  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.normaChild {
+  color: rgba(250, 249, 249, 0.7);
+  font-size: 14px;
 }
 
 .options p {
-  margin: 0 0 5px 0;
-  font-size: 14px;
+  margin: 0;
 }
 
 .options p:hover {
   cursor: pointer;
 }
 
-.x {
-  font-size: 17px;
+.xContainer {
   display: flex;
   justify-content: flex-end;
-  padding: 5px 5px 2px 5px;
+  padding: 4px 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.x {
+  font-size: 14px;
+  cursor: pointer;
+  color: #fff;
+  opacity: 0.6;
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  z-index: 1001;
 }
 
 .x:hover {
-  font-weight: bold;
+  opacity: 1;
 }
 
-@media screen and (max-width: 1800px) {
+@media screen and (max-width: 1270px) {
   .options {
-    right: 400px;
+    right: 0;
   }
 }
 
-@media screen and (max-width: 1590px) {
+@media screen and (max-width: 906px) {
   .options {
-    right: 300px;
+    right: 0;
   }
 }
 
-@media screen and (max-width: 1300px) {
-  .options {
-    right: 250px;
-  }
-}
-
-@media screen and (max-width: 1100px) {
-  .options {
-    right: 200px;
-  }
-}
-
-@media screen and (max-width: 1000px) {
-  .options {
-    right: 150px;
-  }
-}
-
-@media screen and (max-width: 890px) {
-  .options {
-    right: 300px;
-  }
-}
-
-@media screen and (max-width: 690px) {
-  .options {
-    right: 200px;
-  }
-}
-
-@media screen and (max-width: 586px) {
-  .options {
-    right: 50px;
-  }
-}
-
-@media screen and (max-width: 869px) {
-  .space {
+@media screen and (max-width: 830px) {
+  .container {
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    text-align: center;
-    margin: 5px 0;
-    flex-flow: column wrap;
+    flex-direction: column;
+    padding: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 
-  .card {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .songName {
-    margin-left: 5px;
-  }
-}
-
-@media screen and (max-width: 747px) {
-  .space {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    text-align: center;
-    margin: 5px 0;
-    flex-flow: column wrap;
-  }
-
-  .doblao2 {
-    width: 50%;
-  }
-
-  .albumName {
-    width: 70%;
-    text-align: left;
-  }
-}
-
-@media screen and (max-width: 572px) {
-  .number,
-  .albumName {
+  .number {
     display: none;
   }
 
-  .card {
-    grid-template-columns: 1fr 1fr;
-    margin: 0 0 40px 0;
-  }
-
-  .circleContainer {
-    margin-left: 0px;
-  }
-
-  .doblao2 {
-    margin-left: 25px;
-  }
-
-  .card {
-    width: 101%;
-  }
+  .section_a {
+  padding: 40px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-@media screen and (max-width: 490px) {
+.songContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+  .flex {
+    width: 100%;
+    margin: 0;
+  }
+
   .duration {
-    display: none;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .duration > div {
+    justify-content: flex-start;
+    gap: 20px;
+  }
+
+  .options {
+    right: 10px;
+    bottom: auto;
+    margin-top: 5px;
+    width: 250px;
+    max-height: 15rem;
   }
 }

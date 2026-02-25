@@ -1,57 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Style from './Song.module.css';
-import CountUp from 'react-countup';
-import Moment from 'react-moment';
-import { Link } from 'react-router-dom';
-import { LikedSongsApi } from '../../../hooks/hook';
-import greenHeart from '../../../assets/greenHeart.svg';
 import cx from 'classnames';
 
-const Song = ({ song, idx, setId, idliked, tokenAuth, userPlaylist, setPlaylist
-}) => {
+const Song = ({ song, idx, collaborative, setId, token, idliked, userPlaylist, setPlaylist, refreshLiked }) => {
 
-    const [play, setPlay] = useState(true);
+    const [play, setPlay] = useState(false);
     const [option, setOption] = useState(false);
-    const { data, loading, err } = LikedSongsApi(tokenAuth, idliked, idliked);
+    const optionsRef = useRef(null);
+
+    const liked = true; // Since it's LikedSongs view, it's always liked
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (optionsRef.current && !optionsRef.current.contains(event.target)) {
+                setOption(false);
+            }
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
 
     return (
         <tr className={Style.container}>
-            <td className={Style.number}>{idx + 1}</td>
+            <td className={Style.number} onClick={() => setPlay(!play)}>{idx + 1}</td>
             <td className={Style.flex} onClick={() => setPlay(!play)}>
-                <iframe src={`https://open.spotify.com/embed?uri=${song.track ? song.track.uri : ''}`} width='80' height="80" frameBorder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                <div className={Style.containerLeft}>
-                    <p className={Style.songName}>{song.track ? song.track.name : ''}</p>
-                    <div className={Style.inner}>
-                        <p className={Style.e} style={{ display: song.track ? song.track.explicit ? 'flex' : 'none' : 'none' }}>E</p>
-                        <div className={Style.flexWrap} >
-                            {song.track ? song.track.artists.map(artist =>
-                            (
-                                <a href={`/artist/${artist ? artist.id : ''}/${localStorage.getItem('token')}`} style={{ textDecoration: 'none' }}>
-                                    <span style={{ display: artist ? 'block' : 'none', marginRight: '3px' }} className={Style.artistName}>{artist.name},  </span>
-                                </a>)
-                            )
-                                : ''}
-                        </div>
-                    </div>
-                </div>
+                <iframe
+                    src={`https://open.spotify.com/embed/track/${song.track ? song.track.id : ''}?utm_source=generator&theme=0`}
+                    width="100%"
+                    height="80"
+                    frameBorder="0"
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"
+                    title={song.track ? song.track.name : ''}
+                ></iframe>
             </td>
-
-            <td className={Style.albumTd}>
-                <a href={`/album/${song.track ? song.track.album.id : ''}`} style={{ textDecoration: 'none' }}>
-                    <span className={cx(Style.album, Style.hover)}>
-                        {song.track ? song.track.album.name : ''}
-                    </span>
-                </a>
-            </td>
-            <td className={Style.date}>
-                <span className={Style.hover}> {song.track ? new Date(song.added_at).toDateString() : ''}</span>
-            </td>
+            <td className={cx(Style.albumName, Style.albumTh)}>{song.track ? song.track.album.name : ''}</td>
+            <td className={cx(Style.date, Style.date)}>{song.added_at ? new Date(song.added_at).toDateString() : ''}</td>
             <td className={Style.duration}>
-                <div>
-                    <img src={greenHeart} alt="green heart" className={Style.greenHeart} onClick={() => { setId(song.track.id); setPlay(true) }} />
-                    <span className={Style.hover}>
-                        {song ? `${Math.floor(song.track ? song.track.duration_ms / 60000 : '')}:${(((song.track ? song.track.duration_ms % 60000 : '') / 1000).toFixed(0) < 10 ? '0' : '')}${((song.track ? song.track.duration_ms % 60000 : '') / 1000).toFixed(0)}` : ''}
-                    </span>
+                <div style={{ position: 'relative' }}>
+                    {liked ? <i className={cx("fas fa-heart", Style.greenHeartFull)} onClick={() => setId(song.track ? song.track.id : '')}></i> :
+                        <i className={cx("far fa-heart", Style.greenHeart)} onClick={() => setId(song.track ? song.track.id : '')}></i>
+                    }
+
+                    {song.track ? `${Math.floor(song.track.duration_ms / 60000)}:${(((song.track.duration_ms % 60000) / 1000).toFixed(0) < 10 ? '0' : '')}${((song.track.duration_ms % 60000) / 1000).toFixed(0)}` : ''}
 
                     <div className={Style.circleContainer} onClick={() => setOption(!option)}>
                         <div className={Style.circle}></div>
@@ -59,17 +52,19 @@ const Song = ({ song, idx, setId, idliked, tokenAuth, userPlaylist, setPlaylist
                         <div className={Style.circle}></div>
                     </div>
 
-                    <div className={Style.options} style={{ display: option ? 'block' : 'none' }}>
-                        <i className={cx("fas fa-times", Style.x)} onClick={() => setOption(!option)}></i>
-                        {userPlaylist && userPlaylist.length > 0 ? userPlaylist.map(playlist => (
-                            <p className={Style.playlistName}
+                    <div ref={optionsRef} className={Style.options} style={{ display: option ? 'block' : 'none' }}>
+                        <div className={Style.xContainer}>
+                            <i className={cx("fas fa-times", Style.x)} onClick={() => setOption(false)}></i>
+                        </div>
+                        {userPlaylist && userPlaylist.length > 0 ? userPlaylist.map((pl, pIdx) => (
+                            <p className={Style.playlistName} key={pIdx}
                                 onClick={() => {
-                                    setPlaylist({ id: playlist ? playlist.id : '', uri: song.track ? song.track.uri : '' });
-                                    setOption(!option);
+                                    setPlaylist({ id: pl ? pl.id : '', uri: song.track ? song.track.uri : '' });
+                                    setOption(false);
                                 }}>
-                                {playlist ? playlist.name : ''}
+                                {pl ? pl.name : ''}
                             </p>
-                        )) : ''}
+                        )) : <p className={Style.playlistName}>No Playlists Found</p>}
                     </div>
                 </div>
             </td>
@@ -77,4 +72,4 @@ const Song = ({ song, idx, setId, idliked, tokenAuth, userPlaylist, setPlaylist
     )
 }
 
-export default Song
+export default Song;

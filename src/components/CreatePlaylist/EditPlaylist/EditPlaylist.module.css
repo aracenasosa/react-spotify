@@ -1,6 +1,10 @@
 .container {
   display: grid;
-  grid-template-columns: 12% 88%;
+  grid-template-columns: 12vw 1fr;
+  background-color: #121212;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .createForm {
@@ -168,93 +172,50 @@
 }
 
 @media screen and (max-width: 1407px) {
+  .container {
+    grid-template-columns: 20% 1fr;
+  }
   .h2 {
-    margin: 0 0 30px 100px;
+    margin: 50px 0 30px 25px;
   }
 }
 
-@media screen and (max-width: 890px) {
-  .h2 {
-    margin: 0 0 30px 150px;
-  }
-}
 
-@media screen and (max-width: 615px) {
-  .h2 {
-    margin: 50px 0 30px 150px;
-  }
 
-  .form {
-    width: 250px;
-    height: 350px;
-    margin-right: 50px;
-  }
-
-  .form select,
-  .form input,
-  .form textarea,
-  .form button {
-    min-width: 200px;
-    width: 200px;
-  }
-}
-
-@media screen and (max-width: 475px) {
-  .form {
-    width: 180px;
-    height: 350px;
-    margin-right: 50px;
-  }
-
-  .form select,
-  .form input,
-  .form textarea,
-  .form button {
-    min-width: 160px;
-    width: 160px;
-  }
-}
-
-@media screen and (max-width: 380px) {
-  .h2 {
-    margin: 50px 0 30px 40px;
-  }
-
+@media screen and (max-width: 830px) {
   .container {
     grid-template-columns: 1fr;
+    display: block;
+  }
+
+  .createForm {
+    height: auto;
+    min-height: 100vh;
+    padding-bottom: 50px;
+  }
+
+  .h2 {
+    margin: 30px auto;
+    text-align: center;
   }
 
   .form {
-    width: 280px;
-    height: 350px;
-    margin-right: 50px;
+    width: 90%;
+    max-width: 350px;
+    margin: auto;
   }
 
   .form select,
   .form input,
   .form textarea,
   .form button {
-    min-width: 260px;
-    width: 260px;
+    min-width: 100%;
+    width: 100%;
   }
 }
 
-@media screen and (max-width: 337px) {
-  .section_0 {
-    margin: auto;
-  }
-
+@media screen and (max-width: 450px) {
   .form {
-    margin: auto;
-    width: 200px;
-    height: 350px;
-  }
-
-  .form select,
-  .form input,
-  .form textarea,
-  .form button {
-    min-width: 180px;
-    width: 180px;
+    width: 95%;
   }
 }

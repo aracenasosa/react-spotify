@@ -1,21 +1,24 @@
 
 .artistImg {
-    width: 160px;
-    height: 140px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
     border-radius: 5px;
-    margin: auto;
+    object-fit: cover;
 }
 
 .card {
     background: rgb(24,24,24);
-    padding: 10px;
-    width: 190px;
-    height: 270px;
+    padding: 15px;
+    width: 100%;
+    min-width: 160px;
+    max-width: 220px;
+    min-height: 270px;
     display: flex;
-    flex-flow: wrap column;
-    border-radius: 5px;
-    transition: all .5s ease;
-    margin-bottom: 20px;
+    flex-direction: column;
+    border-radius: 8px;
+    transition: all .3s ease;
+    margin: 0 auto 20px auto;
     overflow: hidden;
 }
 
@@ -31,11 +34,14 @@
 }
 
 .marginContainer {
-    margin-left: 25px;
+    margin-left: 0;
 }
 
-a {
-    text-decoration: none;
+.btnFlex {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+    flex-wrap: wrap;
 }
 
 .btnEdit {
@@ -47,7 +53,6 @@ a {
     color: #fff;
     width: 70px;
     padding: 5px 20px;
-    margin: 10px 7px 0 0;
     transition: all .5s ease;
 }
 

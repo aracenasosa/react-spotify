@@ -1,9 +1,11 @@
 export const authEndpoint = "https://accounts.spotify.com/authorize";
+export const tokenEndpoint = "https://accounts.spotify.com/api/token";
 
 // Replace with your app's client ID, redirect URI and desired scopes
-export const clientId = "0631eb8ef3bf4d7693269e9b092dd1de";
-//export const redirectUri = "https://react-spotify-eta.vercel.app/home/";
-export const redirectUri = "http://localhost:3000/home/";
+export const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
+// Redirect URI must match EXACTLY one of the URIs in your Spotify Dashboard.
+export const redirectUri = window.location.origin.replace(/\/$/, '') + '/home';
+
 export const scopes = [
     "user-read-private",
     "user-read-email",

@@ -1,46 +1,54 @@
 .container {
   display: grid;
-  grid-template-columns: 12% 88%;
+  grid-template-columns: 12vw 1fr;
+  background-color: #121212;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .playlist {
-  background: rgb(114, 34, 32);
-  background: linear-gradient(
-    180deg,
-    rgba(114, 34, 32, 1) 35%,
-    rgba(18, 18, 18, 1) 58%
-  );
+  background-color: #121212;
   width: 100%;
+  min-height: 100vh;
 }
 
 .header {
   width: 100%;
-  height: 38vh;
+  height: min-content;
+  min-height: 38vh;
 }
 
 .overlay {
-  background: rgb(190, 57, 57);
   background: linear-gradient(
     180deg,
-    rgba(190, 57, 57, 1) 59%,
-    rgba(114, 34, 34, 1) 82%
+    rgba(190, 57, 57, 1) 0%,
+    rgba(114, 34, 34, 0.4) 50%,
+    rgba(18, 18, 18, 1) 100%
   );
   width: 100%;
   height: 100%;
   display: flex;
-  flex-flow: column wrap;
-  justify-content: flex-start;
+  flex-direction: column;
 }
 
 .innerText {
-  width: 95%;
-  margin: 0 0 40px 40px;
+  width: 100%;
+  padding: 0 40px;
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .innerText h1 {
-  font-size: 60px;
+  font-size: clamp(30px, 8vw, 60px);
   font-weight: bold;
   color: #fff;
+  width: 100%;
+  word-break: break-word;
+  margin: 10px 0;
 }
 
 .colorLight {
@@ -53,7 +61,6 @@
   font-size: 15px;
   color: rgb(201, 212, 209);
   font-weight: bold;
-  padding-left: 5px;
 }
 
 .name {
@@ -67,10 +74,15 @@
   color: #fff;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .arrows {
-  margin: 20px 0 20px 0;
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .arrows img {
@@ -85,19 +97,19 @@
 }
 
 .playlistImg {
-  width: 260px;
-  height: 260px;
+  width: clamp(200px, 20vw, 260px);
+  height: auto;
+  aspect-ratio: 1/1;
   -webkit-box-shadow: 7px 10px 5px 0px rgba(0, 0, 0, 0.12);
   -moz-box-shadow: 7px 10px 5px 0px rgba(0, 0, 0, 0.12);
   box-shadow: 7px 10px 5px 0px rgba(0, 0, 0, 0.12);
   border-radius: 5px;
-  transition: all 0.6s ease;
+  transition: transform 0.3s ease;
 }
 
 .playlistImg:hover {
   cursor: pointer;
-  transition: all 0.5s ease;
-  transform: translateY(0px) scale(1.1);
+  transform: scale(1.05);
 }
 
 .type {
@@ -106,20 +118,30 @@
   font-size: 13px;
 }
 
-.textContainer {
-  margin-left: 20px;
-  margin-top: 80px;
+.content {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
   width: 100%;
+  flex-wrap: wrap;
 }
 
-.textContainer h1 {
-  font-size: 60px;
+.textContainer {
+  flex: 1;
+  min-width: 300px;
+}
+
+.description {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  margin: 10px 0;
 }
 
 .text {
   display: flex;
-  width: 100%;
-  margin-top: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
 }
 
 .circle {
@@ -127,212 +149,68 @@
   border-radius: 50%;
   height: 5px;
   width: 5px;
-  margin: 9px 5px 0 5px;
 }
 
 .section_a {
-  width: 95%;
-  margin: 60px 0 40px 30px;
+  padding: 40px;
 }
 
 .section_a table {
   width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
 }
 
 .normaChild {
   color: rgba(250, 249, 249, 0.7);
   font-size: 14px;
-  font-weight: lighter;
+  padding-bottom: 10px;
   text-align: left;
   border-bottom: 1px solid rgba(250, 249, 249, 0.2);
+}
+
+.title {
+  width: 45%;
+}
+
+.album {
+  width: 20%;
+}
+
+.number {
+  width: 50px;
+  text-align: center;
+}
+
+.date {
+  width: 20%;
 }
 
 .lastChild {
   color: rgba(250, 249, 249, 0.7);
   font-size: 14px;
-  font-weight: lighter;
-  text-align: center;
+  padding-bottom: 10px;
+  text-align: right;
   border-bottom: 1px solid rgba(250, 249, 249, 0.2);
 }
 
-.section_a th img {
-  width: 20px;
-  height: 20px;
-}
 
-.arrows {
-  margin: 20px 0 20px 0px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  justify-content: space-between;
-  width: 85vw;
-}
-
-.leftRight img {
-  background: rgba(0, 0, 0, 0.4);
-  border-radius: 50%;
-  padding: 5px;
-  margin-right: 10px;
-}
-
-.leftRight img:hover {
-  cursor: pointer;
-}
-
-.section_0 {
-  width: 210px;
-  margin-bottom: auto;
-}
-
-.user {
-  background: rgb(5, 5, 5);
-  display: grid;
-  grid-template-columns: 15% 70% 15%;
-  justify-content: center;
-  align-items: center;
-  border-radius: 20px;
-  margin: 0px 15px 0 auto;
-}
-
-.user:hover {
-  cursor: pointer;
-  background: rgba(40, 40, 40);
-}
-
-.user p {
+.loading {
   color: #fff;
-  font-weight: bold;
-  margin: 0 5px;
-  font-size: 16px;
-}
-
-.userImg {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-}
-
-.arrow {
-  width: 28px;
-  height: 28px;
-  margin-left: 3px;
-}
-
-.modal {
-  background: rgb(40, 40, 40);
-  width: 197px;
-  margin: 10px 15px 0 auto;
-  display: flex;
-  z-index: 2;
-  justify-content: center;
-  align-items: center;
-  flex-flow: wrap column;
-  padding: 5px;
-  border-radius: 5px;
-  position: absolute;
-  right: 0px;
-  z-index: 0;
-}
-
-.modal p {
-  color: rgb(151, 151, 151);
-  font-weight: bold;
-  padding: 8px 10px;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-.modal p:hover {
-  background: rgba(151, 151, 151, 0.3);
-  cursor: pointer;
-}
-
-.hr {
-  margin: 20px 0 0 0;
-  border: 1px solid rgba(151, 151, 151, 0.2);
+  text-align: center;
   width: 100%;
+  padding-top: 100px;
 }
 
-.innerText h1 {
-  width: 90%;
-  word-break: break-all;
-}
+/* RESPONSIVE BREAKPOINTS SYNCHRONIZED WITH NAV */
 
-@media screen and (max-width: 1250px) {
+@media screen and (max-width: 1407px) {
   .container {
-    display: grid;
-    grid-template-columns: 15% 85%;
-  }
-
-  .playlist {
-    width: 104%;
-    height: 100vh;
-  }
-
-}
-
-@media screen and (max-width: 1200px) {
-
-  .header {
-    height: 50vh;
-  }
-
-}
-
-@media screen and (max-width: 950px) {
-  .container {
-    display: grid;
-    grid-template-columns: 20% 80%;
-  }
-
-  .playlist {
-    width: 104%;
-    overflow: hidden;
-  }
-
-  .arrows {
-    width: 95%;
+    grid-template-columns: 20% 1fr;
   }
 }
 
-@media screen and (max-width: 861px) {
-  .arrows {
-    width: 95%;
-  }
 
-  .header {
-    height: 80vh;
-  }
-
-  .content {
-    display: flex;
-    flex-flow: column wrap;
-  }
-
-  .section_a {
-    width: 95%;
-    margin: 60px 0 40px 15px;
-  }
-
-  .erased {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 779px) {
-  .description {
-    width: 70%;
-  }
-
-  .header {
-    height: 70vh;
-  }
-
-  .innerText h1 {
-    font-size: 40px;
-  }
-
-}
 
 @media screen and (max-width: 718px) {
   .erased2 {
@@ -340,87 +218,53 @@
   }
 }
 
-@media screen and (max-width: 654px) {
-  .container {
-    display: grid;
-    grid-template-columns: 1fr;
-  }
 
-  .playlist {
-    width: 100%;
-  }
 
-  .innerText {
-    margin: 0 0 0 10px;
-  }
 
-  .header {
-    height: 70vh;
-  }
-}
 
-@media screen and (max-width: 619px) {
-  .erased2 {
+@media screen and (max-width: 830px) {
+  .thead,
+  thead {
     display: none;
   }
-
   .container {
-    display: grid;
     grid-template-columns: 1fr;
+    display: block;
   }
-
-  .playlist {
-    width: 100%;
-  }
-
   .innerText {
-    margin: 0 0 0 10px;
+    padding-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
-
-  .innerText h1 {
-    font-size: 30px;
-    width: 80%;
+  .content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
-
-  .lastChild {
-    width: 50px;
+  .text {
+    justify-content: center;
   }
-
-  .playlist {
-    width: 100%;
+  .innerText > div {
+    justify-content: center;
   }
-
+  .arrows {
+    flex-direction: column-reverse;
+    gap: 10px;
+    padding-top: 0;
+  }
   .number {
     display: none;
   }
-
-  .section_a {
-    width: 95%;
-    margin: 60px 0 40px 5px;
-  }
-
-  .playlistImg {
-    margin: 0 50px 0 0;
-  }
 }
 
-
-@media screen and (max-width: 400px) {
-  .header {
-    height: 75vh;
+@media screen and (max-width: 375px) {
+  .innerText h1 {
+    font-size: 28px;
   }
-
-  .arrows {
-    flex-flow: column wrap;
-  }
-}
-
-@media screen and (max-width: 300px) {
-  .header {
-    height: 95vh;
-  }
-
-  .textContainer {
-    margin: 30px 50px 0 0;
+  .innerText {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }

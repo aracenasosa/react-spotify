@@ -8,7 +8,7 @@ const Album = ({ album }) => {
     
     return (
         <section className={Style.marginContainer}>
-             <Link to={`/album/${album.id}/${localStorage.getItem('token')}`} style={{ textDecoration: 'none' }}>
+             <Link to={`/album/${album.id}`} style={{ textDecoration: 'none' }}>
             <section className={Style.card}>
                 <img className={Style.artistImg} src={album.images[0] ? album.images[0].url : User} alt={album.name} />
 

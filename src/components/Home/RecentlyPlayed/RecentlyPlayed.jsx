@@ -6,17 +6,18 @@ import {SpecificArtist} from '../../../hooks/hook';
 
 const RecentlyPlayed = ({recentlyPlayed, token}) => {
 
-    const { data, loading, err } = SpecificArtist( recentlyPlayed.track.artists ? recentlyPlayed.track.artists[0].id : '', token);
+    const track = recentlyPlayed?.track;
+    const { data, loading, err } = SpecificArtist( track?.artists ? track.artists[0].id : '', token);
 
     return (
         <section className={Style.marginContainer}>
-            <a href={`/album/${recentlyPlayed.track.album ? recentlyPlayed.track.album.id : ''}/${localStorage.getItem('token')}`} style={{ textDecoration: 'none' }}>
+            <a href={`/album/${track?.album ? track.album.id : ''}`} style={{ textDecoration: 'none' }}>
                 <section className={Style.card}>
-                <img className={Style.artistImg} src={data && data.images ? data.images[0].url : User} alt={data ? data.name : ''} />
+                    <img className={Style.artistImg} src={data && data.images && data.images.length > 0 ? data.images[0].url : User} alt={data ? data.name : ''} />
 
-                    <h4>{recentlyPlayed.track.artists ? recentlyPlayed.track.artists[0].name.substring(0, 14) : ''} <span style={{ display: recentlyPlayed.track.artists ? recentlyPlayed.track.artists[0].name.length > 14 ? 'inline' : 'none' : '', color: '#fff' }}>...</span></h4>
+                    <h4>{track?.artists && track.artists[0] ? track.artists[0].name.substring(0, 14) : ''} <span style={{ display: track?.artists && track.artists[0] && track.artists[0].name.length > 14 ? 'inline' : 'none', color: '#fff' }}>...</span></h4>
 
-                    <p>{recentlyPlayed.track ? recentlyPlayed.track.name.substring(0, 20) : ''} <span style={{ display: recentlyPlayed.track ? recentlyPlayed.track.name.length > 20 ? 'inline' : 'none' : '', color: '#fff' }}>...</span></p>
+                    <p>{track ? track.name.substring(0, 20) : ''} <span style={{ display: track && track.name.length > 20 ? 'inline' : 'none', color: '#fff' }}>...</span></p>
 
                 </section>
             </a>

@@ -1,66 +1,31 @@
 import React, { useState } from 'react';
 import Style from './UserProfile.module.css';
-import Nav from './Nav/Nav';
-import { UserProfile } from '../../hooks/hook';
+import Nav from '../Nav/Nav.jsx';
 import User from '../../assets/user.jpeg';
+import UserProfileHeader from '../UserProfileHeader/UserProfileHeader';
 import { Link } from 'react-router-dom';
-import arrowUp from '../../assets/arrowUp.svg';
-import arrowDown from '../../assets/arrowDown.svg';
-import Right from '../../assets/right.svg';
-import Left from '../../assets/left.svg';
+import NavigationArrows from '../NavigationArrows/NavigationArrows';
 
-const UserProfileCo = ({ stateLink, setStateLink, stateLink2, setStateLink2, stateLink3, setStateLink3, match: { params: { id } }, token, tokenAuth }) => {
+import { useSpotify } from '../../context/SpotifyContext';
 
-    const { data: user, loading: userLoading, err: errLoading } = UserProfile(tokenAuth);
-    const [arrow, setArrow] = useState(false);
+const UserProfileCo = () => {
 
-    console.log(user, 'user');
+    const { token, user } = useSpotify();
 
     return (
         <main className={Style.container}>
             <section>
-                <Nav
-                    stateLink={stateLink}
-                    setStateLink={setStateLink}
-                    stateLink2={stateLink2}
-                    setStateLink2={setStateLink2}
-                    stateLink3={stateLink3}
-                    setStateLink3={setStateLink3}
-                    id={id}
-                    token={token}
-                    tokenAuth={tokenAuth}
-                />
+                <Nav />
             </section>
 
             <section className={Style.userContainer}>
 
-                <div className={Style.arrows}>
-
-                    <section className={Style.leftRight}>
-                        <Link to={`/home/${localStorage.getItem('token')}`}>
-                            <img src={Left} alt="left img" />
-                        </Link>
-                        <img src={Right} alt="right img" style={{ display: 'none' }} />
-                    </section>
-
-                    <section className={Style.section_0}>
-                        <section className={Style.userLayout} onClick={() => setArrow(!arrow)} style={{ background: arrow ? 'rgba(151,151,151, .3)' : '', width: user.display_name !== undefined ? user.display_name.length > 16 ? '210px' : '196px' : '' }}>
-                            <img className={Style.userImg} src={user.images && user.images.length > 0 ? user.images[0].url : User} alt={user.display_name} />
-                            <p>{user.display_name ? user.display_name.substring(0, 16) : 'Not Available'} <span style={{ display: user.display_name && user.display_name !== undefined ? user.display_name.length > 16 ? 'inline' : 'none' : 'none', color: '#fff' }}>...</span></p>
-                            <img className={Style.arrow} src={arrow ? arrowUp : arrowDown} alt={user.display_name} />
-                        </section>
-                        <div className={Style.modal} style={{ display: arrow ? 'block' : 'none' }}>
-                            <a href={`/userProfile/${localStorage.getItem('token')}`} style={{ textDecoration: 'none' }}>
-                                <p>Account</p>
-                            </a>
-                            <hr className={Style.hr} />
-                            <Link to={`/`} style={{ textDecoration: 'none' }}>
-                                <p>Log out</p>
-                            </Link>
-                        </div>
-
-                    </section>
-                </div>
+                <section className={Style.topHeader}>
+                    <div className={Style.arrows}>
+                        <NavigationArrows />
+                        <UserProfileHeader user={user} />
+                    </div>
+                </section>
 
                 <section className={Style.description}>
                     <h1>Account Description</h1>

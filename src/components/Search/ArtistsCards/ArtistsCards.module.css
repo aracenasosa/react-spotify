@@ -9,14 +9,15 @@
 .card {
     background: rgb(24,24,24);
     padding: 10px;
-    width: 170px;
+    width: 100%;
+    max-width: 170px;
     height: 260px;
     display: flex;
     flex-flow: wrap column;
     border-radius: 5px;
     transition: all .5s ease;
     overflow: hidden;
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 .card:hover {
@@ -37,7 +38,7 @@
 }
 
 .marginContainer {
-    margin-left: 25px;
+    margin-left: 0px;
 }
 
 

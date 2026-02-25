@@ -8,23 +8,17 @@
     "@testing-library/user-event": "^12.2.2",
     "axios": "^0.21.0",
     "classnames": "^2.2.6",
-    "moment": "^2.29.1",
-    "query-string": "^6.13.7",
     "react": "^17.0.1",
-    "react-audio-player": "^0.14.0",
     "react-countup": "^4.3.3",
     "react-dom": "^17.0.1",
-    "react-moment": "^1.0.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.1",
-    "react-toastify": "^7.0.3",
-    "web-vitals": "^0.2.4"
+    "react-toastify": "^7.0.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "eslintConfig": {
     "extends": [
@@ -45,8 +39,8 @@
     ]
   },
   "devDependencies": {
-    "react-iframe": "^1.8.0",
-    "react-player": "^2.9.0",
-    "react-sound": "^1.2.0"
+    "@vitejs/plugin-basic-ssl": "^2.1.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^6.0.5"
   }
 }
